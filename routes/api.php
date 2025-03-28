@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::prefix('app_top_category')
+    ->as('app_top_category.')
+    ->controller(\App\Http\Controllers\AppTopCategoryController::class)
+    ->group(function() {
+        Route::get('/', 'index')->name('index');
+    });

@@ -8,7 +8,37 @@
 ## Usage
 
 ### API quick reference
-+ 
+#### app_top_category
+
+**Request:** `http://{{your_app_host}}/api/app_top_category?date=YYYY-MM-DD`
+
+**Response:**
+
+Success:
+```json
+{
+    "success": true,
+    "message": "Success",
+    "data": [
+        
+    ],
+    "status": 200
+}
+```
+
+Error:
+```json
+{
+    "success": false,
+    "message": "Validation failed",
+    "errors": {
+        "date": [
+            "The date field must be a date before or equal to today."
+        ]
+    },
+    "status": 422
+}
+```
 
 ### Console tools
 +

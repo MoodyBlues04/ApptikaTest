@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\ApiResponseService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +12,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(ApiResponseService::class, function () {
+            return new ApiResponseService();
+        });
     }
 
     /**
@@ -19,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        if (request()->is('api/*')) {
+            request()->headers->set('Accept', 'application/json');
+        }
     }
 }
