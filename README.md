@@ -41,4 +41,6 @@ Error:
 ```
 
 ### Console tools
-+
+
++ run `php artisan apptika:load_top_app_history --date_from=2000-01-01 --days=1` to load last month history manually
++ Cron set-up for daily run: ` * * * * * cd /path-to-your-app && php artisan schedule:run >> /dev/null`
