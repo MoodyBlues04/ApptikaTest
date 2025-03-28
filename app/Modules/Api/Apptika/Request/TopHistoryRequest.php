@@ -6,7 +6,7 @@ use App\Modules\Api\ApiRequest;
 
 class TopHistoryRequest implements ApiRequest
 {
-    public const AMONG_US_APP = 1421444; // todo mv
+    public const AMONG_US_APP = 1421444;
     public const USA_COUNTRY = 1;
 
     public function __construct(

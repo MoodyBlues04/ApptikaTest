@@ -18,10 +18,11 @@ Success:
 ```json
 {
     "success": true,
-    "message": "Success",
-    "data": [
-        
-    ],
+    "message": "success",
+    "data": {
+        "2": 63,
+        "23": 3
+    },
     "status": 200
 }
 ```

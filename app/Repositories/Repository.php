@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class Repository
 {
-    private Builder $query;
+    protected Builder $query;
 
     public function __construct(Builder|Model|string $model)
     {
