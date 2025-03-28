@@ -8,6 +8,7 @@
 ## Usage
 
 ### API quick reference
+
 #### app_top_category
 
 **Request:** `http://{{your_app_host}}/api/app_top_category?date=YYYY-MM-DD`
@@ -53,5 +54,5 @@ Rate limit error:
 
 ### Console tools
 
-+ run `php artisan apptika:load_top_app_history --date_from=2000-01-01 --days=1` to load last month history manually
++ run `php artisan apptika:load_top_app_history --date_from=2000-01-01 --days=1` history manually
 + Cron set-up for daily run: ` * * * * * cd /path-to-your-app && php artisan schedule:run >> /dev/null`

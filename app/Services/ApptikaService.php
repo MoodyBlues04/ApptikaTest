@@ -27,7 +27,7 @@ class ApptikaService
         }
 
         $loadedCount = 0;
-        foreach ($response->getData() as $categoryId => $categoryData) {
+        foreach ($response->getData() as $categoryId => $categoryData) { // insert for better performance
             $loadedCount += $this->repository->insertOrIgnore($this->prepareData((int)$categoryId, $categoryData));
         }
         return $loadedCount;
@@ -38,6 +38,9 @@ class ApptikaService
         $res = [];
         foreach ($categoryData as $subCategoryId => $subCategoryData) {
             foreach ($subCategoryData as $date => $position) {
+                if (is_null($position)) {
+                    continue;
+                }
                 $res []= [
                     'category_id' => $categoryId,
                     'app_id' => TopHistoryRequest::AMONG_US_APP,

@@ -39,9 +39,8 @@ class LoadTopAppHistory extends Command
             $this->info("Processing date range: $dateFrom to $dateTo");
             $loaded = $this->apptikaService->loadTopAppHistory($dateFrom, $dateTo);
             $this->info("$loaded stats successfully loaded!");
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $this->error("Cannot load data. Error: '{$e->getMessage()}'");
-            return;
         }
     }
 }
