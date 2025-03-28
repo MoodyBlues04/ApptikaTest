@@ -14,6 +14,7 @@ class AppTopCategoryController extends ApiController
         private readonly TopAppHistoryRepository $repository
     ) {
         parent::__construct($apiResponseService);
+        $this->middleware('throttle:5,1')->only('index');
     }
 
     public function index(AppTopCategoryRequest $request): JsonResponse

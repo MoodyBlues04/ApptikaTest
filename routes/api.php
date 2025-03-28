@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('app_top_category')
-    ->as('app_top_category.')
-    ->controller(\App\Http\Controllers\AppTopCategoryController::class)
-    ->group(function() {
-        Route::get('/', 'index')->name('index');
-    });
+Route::middleware('logging')->group(function () {
+    Route::prefix('app_top_category')
+        ->as('app_top_category.')
+        ->controller(\App\Http\Controllers\AppTopCategoryController::class)
+        ->group(function() {
+            Route::get('/', 'index')->name('index');
+        });
+
+});

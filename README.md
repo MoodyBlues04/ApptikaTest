@@ -27,7 +27,7 @@ Success:
 }
 ```
 
-Error:
+Validation Error:
 ```json
 {
     "success": false,
@@ -38,6 +38,16 @@ Error:
         ]
     },
     "status": 422
+}
+```
+
+Rate limit error:
+```json
+{
+    "success": false,
+    "message": "Too Many Attempts.",
+    "errors": [],
+    "status": 429
 }
 ```
 
