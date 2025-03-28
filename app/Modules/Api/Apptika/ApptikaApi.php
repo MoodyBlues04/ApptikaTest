@@ -3,6 +3,7 @@
 namespace App\Modules\Api\Apptika;
 
 use App\Modules\Api\Apptika\Request\TopHistoryRequest;
+use App\Modules\Api\Apptika\Response\ApptikaResponse;
 use App\Modules\Api\BaseApi;
 use App\Modules\Api\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -19,8 +20,9 @@ class ApptikaApi extends BaseApi
     /**
      * @throws GuzzleException
      */
-    public function topHistory(TopHistoryRequest $request): array
+    public function topHistory(TopHistoryRequest $request): ApptikaResponse
     {
-        return $this->get("/package/top_history/{$request->applicationId}/{$request->countryId}", $request);
+        $res = $this->get("/package/top_history/{$request->applicationId}/{$request->countryId}", $request);
+        return new ApptikaResponse($res);
     }
 }

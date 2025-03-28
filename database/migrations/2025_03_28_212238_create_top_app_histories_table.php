@@ -13,17 +13,13 @@ return new class extends Migration
     {
         Schema::create('top_app_history', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')
-                ->constrained('categories')
-                ->onDelete('cascade');
-            $table->foreignId('app_id')
-                ->constrained('apps')
-                ->onDelete('cascade');
+            $table->foreignId('category_id');
+            $table->foreignId('app_id');
             $table->date('date');
-            // note: we store all positions for date only cause app probably would contain more features than one in future
-            // note: for exmaple we would need stats not only about best position, but about worst too
             $table->unsignedInteger('position');
             $table->timestamps();
+
+            $table->unique(['category_id', 'app_id', 'date', 'position']);
         });
     }
 

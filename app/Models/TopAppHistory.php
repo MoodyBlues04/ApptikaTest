@@ -19,6 +19,8 @@ class TopAppHistory extends Model
 {
     use HasFactory;
 
+    protected $table = 'top_app_history';
+
     protected $fillable = [
         'category_id',
         'app_id',

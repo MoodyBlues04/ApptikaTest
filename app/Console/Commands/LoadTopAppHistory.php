@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\ApptikaService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -9,9 +10,14 @@ class LoadTopAppHistory extends Command
 {
     protected $signature = 'apptika:load_top_app_history
                             {--date_from= : Start date (YYYY-MM-DD, default: 1 day ago)}
-                            {--D|days=1 : Number of days to load (default: 1)}';
+                            {--days=1 : Number of days to load (default: 1)}';
 
     protected $description = 'Loads history of top apps from API';
+
+    public function __construct(private readonly ApptikaService $apptikaService)
+    {
+        parent::__construct();
+    }
 
     /**
      * Execute the console command.
@@ -26,13 +32,16 @@ class LoadTopAppHistory extends Command
 
         $dateFrom = $this->option('date_from')
             ? Carbon::parse($this->option('date_from'))->startOfDay()
-            : now()->subDays($days);
-        $dateTo = $dateFrom->addDays($days);
+            : now()->startOfDay()->subDays($days);
+        $dateTo = $dateFrom->copy()->addDays($days);
 
-        $progress = $this->output->createProgressBar($days + 1);
-
-        $this->info("Processing {$days} days...");
-        $progress->start();
-        $progress->advance();
+        try {
+            $this->info("Processing date range: $dateFrom to $dateTo");
+            $loaded = $this->apptikaService->loadTopAppHistory($dateFrom, $dateTo);
+            $this->info("$loaded stats successfully loaded!");
+        } catch (\Exception $e) {
+            $this->error("Cannot load data. Error: '{$e->getMessage()}'");
+            return;
+        }
     }
 }

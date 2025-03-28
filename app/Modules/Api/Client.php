@@ -11,7 +11,7 @@ class Client
 
     public function __construct()
     {
-        $this->client = new GuzzleHttpClient();
+        $this->client = new GuzzleHttpClient(['http_errors' => false]);
     }
 
     /**
